@@ -63,23 +63,8 @@ export default function LoadingScreen({ onFinished }: { onFinished: () => void }
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           />
 
-          {/* Brand name */}
-          <motion.h1
-            initial={{ opacity: 0, letterSpacing: "0.3em" }}
-            animate={{ opacity: 1, letterSpacing: "0.15em" }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-xl sm:text-2xl font-bold tracking-widest text-foreground mb-8"
-          >
-            VITAL-TAG
-          </motion.h1>
-
-          {/* Progress bar */}
           <div className="w-48 sm:w-56 h-1 rounded-full bg-secondary overflow-hidden">
-            <motion.div
-              className="h-full rounded-full bg-primary"
-              style={{ width: `${progress}%` }}
-              transition={{ duration: 0.1 }}
-            />
+            <motion.div className="h-full rounded-full bg-primary" style={{ width: `${progress}%` }} transition={{ duration: 0.1 }} />
           </div>
 
           {/* Status text */}
@@ -92,10 +77,10 @@ export default function LoadingScreen({ onFinished }: { onFinished: () => void }
             {progress < 30
               ? "Initializing Edge-AI…"
               : progress < 60
-              ? "Connecting to herd sensors…"
-              : progress < 90
-              ? "Loading telemetry dashboard…"
-              : "Ready"}
+                ? "Connecting to herd sensors…"
+                : progress < 90
+                  ? "Loading telemetry dashboard…"
+                  : "Ready"}
           </motion.p>
         </motion.div>
 
