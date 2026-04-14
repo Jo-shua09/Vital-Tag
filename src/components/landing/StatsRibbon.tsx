@@ -25,8 +25,8 @@ const stats = [
 export default function StatsRibbon() {
   return (
     <section className="relative py-8 border-y border-border/50">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-center items-center gap-10 place-content-center">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-6 gap-x-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:justify-center lg:items-center gap-10 lg:place-content-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-20">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
