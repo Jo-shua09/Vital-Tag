@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 6% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 6% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 142 71% 45%;
+    --radius: 0.75rem;
+    --sidebar-background: 240 6% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 142 71% 45%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 6% 20%;
+    --sidebar-ring: 142 71% 45%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 2%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 2%;
+    --critical: 0 72% 51%;
+    --critical-foreground: 0 0% 98%;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg;
+  }
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-border/60 shadow-xl;
+  }
+  .glow-primary {
+    box-shadow: 0 0 30px hsl(142 71% 45% / 0.3), 0 0 60px hsl(142 71% 45% / 0.1);
+  }
+  .glow-critical {
+    box-shadow: 0 0 30px hsl(0 72% 51% / 0.3), 0 0 60px hsl(0 72% 51% / 0.1);
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(142,71%,45%)] to-[hsl(160,60%,55%)];
+  }
+  .radial-gradient-bg {
+    background: radial-gradient(ellipse at 50% 0%, hsl(142 71% 45% / 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, hsl(200 80% 50% / 0.04) 0%, transparent 50%),
+                hsl(240 10% 3.9%);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
