@@ -25,7 +25,7 @@ export default function HerdTable() {
     (a) =>
       a.name.toLowerCase().includes(search.toLowerCase()) ||
       a.tagId.toLowerCase().includes(search.toLowerCase()) ||
-      a.pen.toLowerCase().includes(search.toLowerCase())
+      a.pen.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -36,6 +36,7 @@ export default function HerdTable() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             value={search}
+            id="herd-search-input" // Added unique ID for accessibility
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search tag, pen..."
             className="pl-9 pr-4 py-2 rounded-lg bg-secondary/50 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 w-full sm:w-56"
@@ -69,12 +70,8 @@ export default function HerdTable() {
               >
                 <td className="py-3 px-3 font-medium text-foreground">{a.tagId}</td>
                 <td className="py-3 px-3 text-muted-foreground">{a.pen}</td>
-                <td className={`py-3 px-3 ${a.temp > 39.5 ? "text-critical" : "text-foreground"}`}>
-                  {a.temp}°C
-                </td>
-                <td className={`py-3 px-3 ${a.heartRate > 100 ? "text-critical" : "text-foreground"}`}>
-                  {a.heartRate} BPM
-                </td>
+                <td className={`py-3 px-3 ${a.temp > 39.5 ? "text-critical" : "text-foreground"}`}>{a.temp}°C</td>
+                <td className={`py-3 px-3 ${a.heartRate > 100 ? "text-critical" : "text-foreground"}`}>{a.heartRate} BPM</td>
                 <td className={`py-3 px-3 ${a.jawRhythm < 0.8 ? "text-critical" : a.jawRhythm < 1.2 ? "text-warning" : "text-foreground"}`}>
                   {a.jawRhythm.toFixed(2)} Hz
                 </td>
@@ -105,7 +102,9 @@ export default function HerdTable() {
             }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-medium text-foreground">{a.tagId} — {a.name}</span>
+              <span className="font-medium text-foreground">
+                {a.tagId} — {a.name}
+              </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className={`w-2 h-2 rounded-full ${statusColors[a.status]} ${a.status === "critical" ? "animate-pulse-glow" : ""}`} />
                 <span className={`text-xs font-medium capitalize ${statusText[a.status]}`}>{a.status}</span>
