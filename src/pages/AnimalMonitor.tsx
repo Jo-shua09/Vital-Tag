@@ -123,6 +123,9 @@ export default function AnimalMonitor() {
         {/* Live Telemetry Chart */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <LiveTelemetry status={animal.status} />
+          <div className="h-72">
+            <LiveTelemetry status={animal.status} readings={readings} error={readingsError} />
+          </div>
         </motion.div>
       </section>
 

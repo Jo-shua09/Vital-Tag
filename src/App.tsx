@@ -33,7 +33,7 @@ const App = () => {
         <Sonner />
         <AnimatePresence mode="wait">{loading && <LoadingScreen key="loader" onFinished={handleFinished} />}</AnimatePresence>
         {!loading && (
-          <BrowserRouter>
+          <BrowserRouter future={{ v7_startTransition: true }}>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
