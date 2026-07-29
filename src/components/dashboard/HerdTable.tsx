@@ -36,7 +36,7 @@ export default function HerdTable() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             value={search}
-            id="herd-search-input" // Added unique ID for accessibility
+            id="herd-search-input"
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search tag, pen..."
             className="pl-9 pr-4 py-2 rounded-lg bg-secondary/50 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 w-full sm:w-56"
