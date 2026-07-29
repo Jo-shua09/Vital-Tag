@@ -1,30 +1,29 @@
 import { motion } from "framer-motion";
 import { Tag, HeartPulse, AlertTriangle, Wifi } from "lucide-react";
-import { animals } from "@/data/animals";
+import { Animal } from "@/data/animals";
 import GlassCard from "./GlassCard";
 
-const healthy = animals.filter((a) => a.status === "healthy").length;
-const warnings = animals.filter((a) => a.status === "warning").length;
-const critical = animals.filter((a) => a.status === "critical").length;
-const total = 120; // simulated total active tags
+interface SummaryCardsProps {
+  animals: Animal[];
+}
 
-const cards = [
-  { icon: Tag, label: "Active Tags", value: total.toString(), color: "text-primary", bg: "bg-primary/10" },
-  { icon: HeartPulse, label: "Herd Health", value: `${Math.round(((total - critical - warnings) / total) * 100)}%`, color: "text-primary", bg: "bg-primary/10" },
-  { icon: AlertTriangle, label: "Critical Alerts", value: critical.toString(), color: "text-critical", bg: "bg-critical/10" },
-  { icon: Wifi, label: "Network", value: "Online", color: "text-primary", bg: "bg-primary/10" },
-];
+export default function SummaryCards({ animals }: SummaryCardsProps) {
+  const total = animals.length;
+  const critical = animals.filter((a) => a.status === "critical").length;
+  const warnings = animals.filter((a) => a.status === "warning").length;
+  const healthyPercentage = total > 0 ? Math.round(((total - critical - warnings) / total) * 100) : 100;
 
-export default function SummaryCards() {
+  const cards = [
+    { icon: Tag, label: "Active Tags", value: total.toString(), color: "text-primary", bg: "bg-primary/10" },
+    { icon: HeartPulse, label: "Herd Health", value: `${healthyPercentage}%`, color: "text-primary", bg: "bg-primary/10" },
+    { icon: AlertTriangle, label: "Critical Alerts", value: critical.toString(), color: "text-critical", bg: "bg-critical/10" },
+    { icon: Wifi, label: "Network", value: "Online", color: "text-primary", bg: "bg-primary/10" },
+  ];
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((c, i) => (
-        <motion.div
-          key={c.label}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1 }}
-        >
+        <motion.div key={c.label} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
           <GlassCard className="hover:border-primary/30 transition-all cursor-default">
             <div className="flex items-start justify-between">
               <div>

@@ -13,6 +13,11 @@ import AnimalMonitor from "./pages/AnimalMonitor";
 import Alerts from "./pages/Alerts";
 import AIInsights from "./pages/AIInsights";
 import DashboardLayout from "./components/layout/DashboardLayout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,14 +31,17 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AnimatePresence mode="wait">
-          {loading && <LoadingScreen key="loader" onFinished={handleFinished} />}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{loading && <LoadingScreen key="loader" onFinished={handleFinished} />}</AnimatePresence>
         {!loading && (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
               <Route element={<DashboardLayout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/animal/:id" element={<AnimalMonitor />} />

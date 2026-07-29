@@ -1,14 +1,38 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { herdHealthHistory } from "@/data/telemetry";
+import { Animal } from "@/data/animals";
 import GlassCard from "./GlassCard";
 
-export default function HerdHealthChart() {
+interface HerdHealthChartProps {
+  animals: Animal[];
+}
+
+export default function HerdHealthChart({ animals }: HerdHealthChartProps) {
+  // This is a placeholder to show a chart structure even with no data.
+  // In a real app, you'd generate this trend from historical data.
+  const healthTrend = [
+    { day: "Mon", healthy: 0, warning: 0, critical: 0 },
+    { day: "Tue", healthy: 0, warning: 0, critical: 0 },
+    { day: "Wed", healthy: 0, warning: 0, critical: 0 },
+    { day: "Thu", healthy: 0, warning: 0, critical: 0 },
+    { day: "Fri", healthy: 0, warning: 0, critical: 0 },
+    { day: "Sat", healthy: 0, warning: 0, critical: 0 },
+    { day: "Sun", healthy: 0, warning: 0, critical: 0 },
+  ];
+
+  // Override today's data with live counts
+  const todayIndex = new Date().getDay() - 1; // Monday = 0
+  if (todayIndex >= 0 && todayIndex < 7) {
+    healthTrend[todayIndex].healthy = animals.filter((a) => a.status === "healthy").length;
+    healthTrend[todayIndex].warning = animals.filter((a) => a.status === "warning").length;
+    healthTrend[todayIndex].critical = animals.filter((a) => a.status === "critical").length;
+  }
+
   return (
     <GlassCard>
       <h3 className="text-sm font-semibold text-foreground mb-4">7-Day Herd Health Trend</h3>
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={herdHealthHistory}>
+          <AreaChart data={healthTrend}>
             <defs>
               <linearGradient id="gHealthy" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="hsl(142,71%,45%)" stopOpacity={0.3} />
